@@ -1,0 +1,45 @@
+/*#header {
+    height: 100px;
+    width: 100%;
+    background-color: orange;
+}*/
+
+/*======== menu styles ========*/
+/*#menu-container {
+    height: 100%;
+    width: 100%;
+}
+#menu-items {
+    height: 30px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #CECECE;
+    position: absolute;
+    top: 0;
+}
+.menu-item {
+    float: left;
+    width: 100px;
+    height:30px;
+    margin-left: 20px;
+    padding: 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+}
+.menu-item:hover {
+    color: white;
+}*/
+
+/*====== Link Bar ====== */
+/*#links {
+    height: 50px;
+    width: 100%;
+
+}*/
+/* ====== Gallery ====== */
+#gallery_container {
+    text-align: center;
+}
