@@ -19,6 +19,7 @@ end
 # ===== Profile =====
 get '/profile' do
 	puts "\n******* profile *******"
+	@doctor = Doctor.find(session[:doctor_id])
 	erb :profile
 end
 # ==== Log Out =====
@@ -154,8 +155,10 @@ post '/doctors' do
 		name: params[:name],
 		speciality: params[:speciality]
 	)
-	@doctors = Doctor.order("created_at").last
-	puts "@doctors:, #{@doctors}"
+	@doctor = Doctor.order("created_at").last
+	session[:doctor_id] = @doctor.id
+	@current_user = get_current_user
+	puts "@doctor:, #{@doctor}"
 	redirect '/profile'
 end
 
@@ -175,8 +178,8 @@ post '/patients' do
 		firstname: params[:firstname],
 		lastname: params[:lastname]
 	)
-	@patients = Patient.order("created_at").last
-	puts "@patients:, #{@patients}"
+	@patient = Patient.order("created_at").last
+	puts "@patient:, #{@patient}"
 	redirect '/profile'
 end
 
@@ -185,15 +188,19 @@ get '/appointments' do
 	puts "\n******* appointments *******"
 	erb :appointments
 end
-# post '/Appointments' do
-#     puts "params: #{params.inspect}"
-# 	Appointment.create(
-# 		doctor_id: params[:doctor_id]
-# 		patient_id: params[:patient_id],
-# 		start_datetime: params[:start_datetime],
-# 		end_datetime: params[:end_datetime]
-# 	)
-# 	@appointments = Appointment.order("created_at").last
-# 	puts "@appointments:, #{@appointments}"
-# 	redirect '/'
-# end
+get '/appointments_form' do
+	puts "\n******* appointments_form *******"
+	erb :appointments_form
+end
+post '/appointments' do
+    puts "params: #{params.inspect}"
+	Appointment.create(
+		doctor_id: params[:doctor_id],
+		# patient_id: params[:patient_id],
+		start_datetime: params[:start_datetime]
+		# end_datetime: params[:end_datetime]
+	)
+	@appointments = Appointment.order("created_at").last
+	puts "@appointments:, #{@appointments}"
+	redirect '/'
+end

@@ -1,13 +1,4 @@
 <!-- ======= views/appointments.erb ======= -->
 <h1>Appointments</h1>
 
-<!-- doctor_id, patient_id, start_datetime, end_datetime -->
-
-<form  id="appointments_form" method="POST" action="/appointments">
-    <div><label for="clinic_id">Clinic ID</label><input type="clinic_id" name="clinic_id" value=""></div>
-    <div><label for="doctor_id">Doctor ID</label><input type="doctor_id" name="doctor_id" value=""></div>
-    <div><label for="patient_id">Patient ID</label><input type="patient_id" name="patient_id" value=""></div>
-    <div><label for="start_datetime">Start Time</label><input type="start_datetime" name="start_datetime" value=""></div>
-    <div><label for="end_datetime">End Time</label><input type="end_datetime" name="end_datetime" value=""></div>
-    <input type="submit" id="submit">
-</form>
+<a href="/appointments_form/<%= session[:clinic_id]%>">Appointment Center</a>

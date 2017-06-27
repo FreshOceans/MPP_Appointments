@@ -4,7 +4,7 @@
 <div id="clinics_list">
     <% @clinics.each_with_index do |clinic, index| %>
         <% puts "** clinic/index: #{clinic}: #{index}" %>
-        <p> <%= clinic[:name :address] %> </p>
-        <!-- <p> <%= clinic[:address] %> </p> -->
+        <p> <%= clinic[:name] %> </p>
+        <p> <%= clinic[:address] %> </p>
     <%end%>
 </div>
