@@ -1,7 +1,14 @@
 <!-- ======= views/profile.erb ======= -->
 <h1>Profile</h1>
 
-<a href="/update_clinic_form">Update your Clinic</a><br>
-<a href="/delete_clinic">Delete your Clinic</a><br>
-<a href="/update_doctor_form">Update your Account</a><br>
-<a href="/update_patient_form">Update your Patient Info</a><br>
+<div id="account_details">
+
+</div>
+
+<div id="edit_account">
+    <p>Change Account Settings</p>
+    <a href="/update_clinic_form/<%= session[:clinic_id]%> ">Update your Clinic</a><br>
+    <a href="/delete_clinic/<%= session[:clinic_id]%> ">Delete your Clinic</a><br>
+    <!-- <a href="/update_doctor_form">Update your Account</a><br>
+    <a href="/update_patient_form">Update your Patient Info</a><br> -->
+</div>

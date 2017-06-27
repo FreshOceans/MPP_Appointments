@@ -2,7 +2,7 @@
 
 <!-- == dynamically create menu items == -->
 <% menu_items_array = [ "Home","profile", "clinic", "emr", "patients", "doctors", "appointments" ] %>
-<div id="menu-items">
+<div id="menu_items">
   <% for z in menu_items_array %>
   <% h = z %>
     <% if z == "Home" %>
@@ -10,7 +10,7 @@
         <% z = "/" %>
     <% end %>
     <a href = <%= z %>>
-      <div class="menu-item"> <%= h %></div>
+      <div class="menu_item"> <%= h %></div>
     </a>
   <% end %>
 </div>

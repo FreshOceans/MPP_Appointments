@@ -63,7 +63,6 @@ def get_current_user
     end
 end
 
-
 # ===== Clinic =====
 get '/clinic' do
 	puts "\n******* clinic *******"
@@ -86,6 +85,12 @@ post '/clinic' do
 	puts "@clinic:, #{@clinic}"
 	redirect '/profile'
 end
+# == Read Clinic Info
+get '/all_clinics' do
+	puts "\n******* all_clinics *******"
+	@clinics = Clinic.all
+	erb :all_clinics
+end
 # == Update Clinic Info
 get '/update_clinic_form' do
 	puts "\n******* update_clinic_form *******"
@@ -95,21 +100,15 @@ get '/update_clinic_form/:id' do
 	puts "\n******* update clinic form *******"
 	puts "params.inspect: #{params.inspect}"
 	@clinic = Clinic.find(params[:id])
-	erb :update
+	erb :update_clinic_form
 end
 post '/update' do
 	puts "\n******* update *******"
 	puts "params.inspect: #{params.inspect}"
+	params.delete("captures")
 	@clinic = Clinic.find(params[:id]).update_attributes(params)
-	erb :profile
+	erb :clinic
 end
-get '/profile/:id' do
-	puts "\n******* profile *******"
-	puts "session[:clinic_id]: #{session[:clinic_id]}"
-	@clinic = Clinic.find(params[:id])
-	erb :profile
-end
-
 # == Delete Clinic
 get '/delete_clinic' do
 	puts "\n******* delete_clinic *******"
@@ -118,26 +117,26 @@ end
 get '/delete_clinic/:id' do
 	puts "\n******* delete_clinic *******"
 	puts "params.inspect: #{params.inspect}"
-	@clinic = Clinic.find(params[:id].destroy)
+	@clinic = Clinic.find(params[:id]).destroy
+	flash[:notice] = "You have successfully been removed from the clinic."
 	redirect '/profile'
 end
-
 
 # ===== EMR =====
 get '/emr' do
 	puts "\n******* emr *******"
 	erb :emr
 end
-# post '/EMR' do
-#     puts "params: #{params.inspect}"
-# 	Emr.create(
-# 		diagnosis: params[:diagnosis],
-# 		prognosis: params[:prognosis]
-# 	)
-# 	@emr = Emr.order("created_at").last
-# 	puts "@emr:, #{@emr}"
-# 	redirect '/Patients'
-# end
+post '/emr' do
+    puts "params: #{params.inspect}"
+	Emr.create(
+		diagnosis: params[:diagnosis],
+		prognosis: params[:prognosis]
+	)
+	@emr = Emr.order("created_at").last
+	puts "@emr:, #{@emr}"
+	redirect '/Patients'
+end
 
 # ===== Doctors =====
 get '/doctors' do
