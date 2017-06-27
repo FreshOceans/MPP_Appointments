@@ -22,7 +22,13 @@ get '/profile' do
 	puts "\n******* profile *******"
 	erb :profile
 end
-
+# ==== Log Out =====
+get "/logout" do
+	puts "\n******* logout *******"
+    session[:doctor_id] = nil
+	flash[:notice] = "You've been logged out successfully."
+	redirect '/'
+end
 # ===== Sign IN =====
 # == Doctors
 get '/doctor_sign_in' do
@@ -88,7 +94,7 @@ end
 get '/update_clinic_form/:id' do
 	puts "\n******* update clinic form *******"
 	puts "params.inspect: #{params.inspect}"
-	@clinic = Clinic.find params[:id]
+	@clinic = Clinic.find(params[:id])
 	erb :update
 end
 post '/update' do
@@ -100,7 +106,7 @@ end
 get '/profile/:id' do
 	puts "\n******* profile *******"
 	puts "session[:clinic_id]: #{session[:clinic_id]}"
-	@clinic = Clinic.find params[:id]
+	@clinic = Clinic.find(params[:id])
 	erb :profile
 end
 
@@ -112,7 +118,7 @@ end
 get '/delete_clinic/:id' do
 	puts "\n******* delete_clinic *******"
 	puts "params.inspect: #{params.inspect}"
-	@clinic = Clinic.find params[:id].destroy
+	@clinic = Clinic.find(params[:id].destroy)
 	redirect '/profile'
 end
 

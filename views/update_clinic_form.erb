@@ -4,8 +4,8 @@
 <!-- name, address  -->
 
 <form  id="clinic_update_form" method="POST" action="/update">
-    <div><label for="name">Name</label><input type="name" name="name" value=""></div>
-    <div><label for="address">Address</label><input type="address" name="address" value=""></div>
+    <div><label for="name">Name</label><input type="name" name="name" value="<%= @clinic.name %>"></div>
+    <div><label for="address">Address</label><input type="address" name="address" value="<%= @clinic.address %>"></div>
     <input type="submit" id="submit">
-    <input type="hidden" value="" name="id">
+    <input type="hidden" value="<%= @clinic.id %>" name="id">
 </form>
