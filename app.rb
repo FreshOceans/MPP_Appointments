@@ -3,6 +3,7 @@ require "sinatra"
 require 'sinatra/activerecord'
 require "sinatra/reloader" if development?
 require './models'
+require "sinatra/flash"
 
 # ======= database =======
 set :database, "sqlite3:appointments.db"
@@ -20,6 +21,40 @@ end
 get '/profile' do
 	puts "\n******* profile *******"
 	erb :profile
+end
+
+# ===== Sign IN =====
+# == Doctors
+get '/doctor_sign_in' do
+	puts "\n******* doctor_sign_in *******"
+	erb :doctor_sign_in
+end
+post '/doctor_sign_in' do
+	puts "\n******* doctor_sign_in *******"
+    @doctor = Doctor.where(name: params[:name]).first
+	if @doctor
+		if @doctor.clinic_id == params[:clinic_id]
+			session[:doctor_id] = @doctor.id
+            @current_user = get_current_user
+			flash[:notice] = "You've been signed in successfully."
+			redirect '/'
+		else
+			flash[:notice] = "Please check your clinic id and name and try again."
+			redirect "/doctor_sign_in"
+		end
+	else
+		flash[:notice] = "Please check your clinic id and name and try again."
+		redirect "/doctor_sign_in"
+	end
+end
+# ======= get_current_user =======
+def get_current_user
+    puts "\n******* get_current_user *******"
+    if session[:doctor_id]
+        return Doctor.find(session[:doctor_id])
+    else
+        puts "** NO CURRENT DOCTOR **"
+    end
 end
 
 
