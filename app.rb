@@ -11,7 +11,6 @@ set :database, "sqlite3:appointments.db"
 # =======  sessions =======
 enable :sessions
 
-
 # ======= home =======
 get '/' do
 	puts "\n******* home *******"
@@ -89,6 +88,7 @@ end
 get '/all_clinics' do
 	puts "\n******* all_clinics *******"
 	@clinics = Clinic.all
+	puts "@clinics.inspect: #{@clinics.inspect}"
 	erb :all_clinics
 end
 # == Update Clinic Info

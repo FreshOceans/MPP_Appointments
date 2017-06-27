@@ -1,0 +1,10 @@
+<!-- ======= views/all_clinics.erb ======= -->
+
+<% puts "\n******* do loop (each_with_index) *******" %>
+<div id="clinics_list">
+    <% @clinics.each_with_index do |clinic, index| %>
+        <% puts "** clinic/index: #{clinic}: #{index}" %>
+        <p> <%= clinic[:name :address] %> </p>
+        <!-- <p> <%= clinic[:address] %> </p> -->
+    <%end%>
+</div>
